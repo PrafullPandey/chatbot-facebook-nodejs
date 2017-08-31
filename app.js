@@ -227,11 +227,11 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
 					&&contexts[0].parameters['previous_job']!='')?contexts[0].parameters['previous_job']:'';
 				let user_exp = (isDefined(context[0].parameters['user_exp'])
 					&&contexts[0].parameters['user_exp']!='')?contexts[0].parameters['user_exp']:'';
-				let job-vacancy = (isDefined(context[0].parameters['job-vacancy'])
+				let job_vacancy = (isDefined(context[0].parameters['job-vacancy'])
 					&&contexts[0].parameters['job-vacancy']!='')?contexts[0].parameters['job-vacancy']:'';
 
-				if(phone_no!='' && user_name !='' && previous_job!='' && user_exp!='' && job-vacancy!=''){
-					let email_content = 'A new job enquiry from '+user_name+' for the job '+job-vacancy+
+				if(phone_no!='' && user_name !='' && previous_job!='' && user_exp!='' && job_vacancy!=''){
+					let email_content = 'A new job enquiry from '+user_name+' for the job '+job_vacancy+
 										'.<br> Previous job position: '+previous_job + '.' +
 										'.<br> Year of experience: ' + user_exp + '.' + 
 										'.<br> Phone number : '+phone_number+' .';
