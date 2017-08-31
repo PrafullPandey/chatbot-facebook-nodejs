@@ -187,6 +187,60 @@ function handleEcho(messageId, appId, metadata) {
 
 function handleApiAiAction(sender, action, responseText, contexts, parameters) {
 	switch (action) {
+
+		case "flipkart-faq":
+			sendTextMessage(sender , responseText);
+			sendTypingOn(sender);
+
+			//ask what user want to don next
+			setTimeout(function(){
+				let buttons =[
+		          {
+		            type:"web_url",
+		            url:"https://www.google.com",
+		            title:"Google"
+		          },
+		          {
+		            type:"phone_number",
+		            payload:"+919889606087",
+		            title:"Call us"
+		          },
+		          {
+		            type:"postback",
+		            payload:"CHAT",
+		            title:"Keep on Chatting"
+		          }
+		        ]
+				sendButtonMessage(sender,"what would you like to do next",buttons);
+			},3000);
+
+			break;
+
+
+		case "details-application":
+			if(isDefined(context[0]) && context[0].name == 'job-application' &&context[0].parameters){
+				let phone_number = (isDefined(context[0].parameters['phone_no'])
+					&&contexts[0].parameters['phone_no']!='')?contexts[0].parameters['phone_no']:'';
+				let user_name = (isDefined(context[0].parameters['username'])
+					&&contexts[0].parameters['username']!='')?contexts[0].parameters['username']:'';
+				let previous_job = (isDefined(context[0].parameters['previous_job'])
+					&&contexts[0].parameters['previous_job']!='')?contexts[0].parameters['previous_job']:'';
+				let user_exp = (isDefined(context[0].parameters['user_exp'])
+					&&contexts[0].parameters['user_exp']!='')?contexts[0].parameters['user_exp']:'';
+				let job-vacancy = (isDefined(context[0].parameters['job-vacancy'])
+					&&contexts[0].parameters['job-vacancy']!='')?contexts[0].parameters['job-vacancy']:'';
+
+				if(phone_no!='' && user_name !='' && previous_job!='' && user_exp!='' && job-vacancy!=''){
+					let email_content = 'A new job enquiry from '+user_name+' for the job '+job-vacancy+
+										'.<br> Previous job position: '+previous_job + '.' +
+										'.<br> Year of experience: ' + user_exp + '.' + 
+										'.<br> Phone number : '+phone_number+' .';
+					//sendEmail('New Job Application' , email_content);
+				}			
+			}
+			sendTextMessage(sender,responseText);
+			break;
+
 		case "job-enquiry":
 			let replies= [
 			      {
@@ -877,6 +931,10 @@ function verifyRequestSignature(req, res, buf) {
 			throw new Error("Couldn't validate the request signature.");
 		}
 	}
+}
+
+function sendEmail(subject , content){
+
 }
 
 function isDefined(obj) {
