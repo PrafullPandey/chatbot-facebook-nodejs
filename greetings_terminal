@@ -1,0 +1,61 @@
+
+curl -X POST -H "Content-Type: application/json" -d '{
+"greeting":[
+  {
+    "locale":"default",
+    "text":"Hi! Baby Jarvis at your service!"
+  }, {
+    "locale":"en_US",
+    "text":"Hi! Baby Jarvis at your service!"
+  }
+]
+}' "https://graph.facebook.com/v2.6/me/messenger_profile?access_token=EAAbIfGSWGC8BAAboZBiIsw9iGlY2Rbt4ZAQX85EKtfKq3LU52EEEvQwWpXwWmkIZBgYuEsTcbkGbM7ZBQvvUcm1YbuMrq1riUaoAyEIMvxdN6sMvpe4gxwWW1eUDUevgIU3MRpJDCWadLCaWJcsxoQJkJB8dAA6eT7p1265R4QUKZC8SMURyO"
+
+
+
+
+******getting started button******
+
+
+curl -X POST -H "Content-Type: application/json" -d '{ 
+  "get_started":{
+    "payload":"GET_STARTED"
+  }
+}' "https://graph.facebook.com/v2.6/me/messenger_profile?access_token=EAAbIfGSWGC8BAAboZBiIsw9iGlY2Rbt4ZAQX85EKtfKq3LU52EEEvQwWpXwWmkIZBgYuEsTcbkGbM7ZBQvvUcm1YbuMrq1riUaoAyEIMvxdN6sMvpe4gxwWW1eUDUevgIU3MRpJDCWadLCaWJcsxoQJkJB8dAA6eT7p1265R4QUKZC8SMURyO"
+
+
+
+
+**********persistent menu***********
+
+curl -X POST -H "Content-Type: application/json" -d '{ 
+"persistent_menu":[
+  {
+    "locale":"default",
+    "composer_input_disabled": false,
+    "call_to_actions":[
+      {
+        "title":"Contact",
+        "type":"nested",
+        "call_to_actions":[
+          {
+            "title":"View Website",
+            "type":"web_url",
+            "url":"www.google.com"
+          },
+          {
+            "title":"Apply for job",
+            "type":"postback",
+            "payload":"JOB_APPLY"
+          }
+        ]
+      },
+      {
+        "type":"postback",
+        "title":"Start here",
+        "payload":"GET_STARTED"
+      }
+    ]
+  }
+]
+}' "https://graph.facebook.com/v2.6/me/messenger_profile?access_token=EAAbIfGSWGC8BAAboZBiIsw9iGlY2Rbt4ZAQX85EKtfKq3LU52EEEvQwWpXwWmkIZBgYuEsTcbkGbM7ZBQvvUcm1YbuMrq1riUaoAyEIMvxdN6sMvpe4gxwWW1eUDUevgIU3MRpJDCWadLCaWJcsxoQJkJB8dAA6eT7p1265R4QUKZC8SMURyO"

@@ -800,6 +800,11 @@ function receivedPostback(event) {
 	var payload = event.postback.payload;
 
 	switch (payload) {
+		case 'JOB_APPLY':
+			//get feed back to new jobs
+			sendToApiAi(senderID,'job opening');
+			break;
+
 		case 'CHAT':
 			sendTextMessage(senderID,"T love chatting too. Do you have any other question for me?");
 			break;
