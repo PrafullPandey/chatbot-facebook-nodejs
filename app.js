@@ -1,16 +1,19 @@
 'use strict';
 
-const apiai = require('apiai');
+
+//loading modules
+
+const apiai = require('apiai'); 
 const config = require('./config');
 const express = require('express');
-const crypto = require('crypto');
-const bodyParser = require('body-parser');
-const request = require('request');
-const app = express();
+const crypto = require('crypto'); //for verifying signature
+const bodyParser = require('body-parser');//for parsing data
+const request = require('request'); 
+const app = express(); //node js application framework , speeds up development
 const uuid = require('uuid');
 
 
-// Messenger API parameters
+// Messenger API parameters , checking them
 if (!config.FB_PAGE_TOKEN) {
 	throw new Error('missing FB_PAGE_TOKEN');
 }
@@ -28,7 +31,7 @@ if (!config.SERVER_URL) { //used for ink to static files
 }
 
 
-
+//set port to 5000
 app.set('port', (process.env.PORT || 5000))
 
 //verify request came from facebook
@@ -184,6 +187,28 @@ function handleEcho(messageId, appId, metadata) {
 
 function handleApiAiAction(sender, action, responseText, contexts, parameters) {
 	switch (action) {
+		case "job-enquiry":
+			let replies= [
+			      {
+			        "content_type":"text",
+			        "title":"Accountant",
+			        "payload":"Accountant"
+			        
+			      },
+			      {
+			        "content_type":"text"
+			        "title":"Sales",
+			        "payload":"Sales"
+			      },
+			      {
+			        "content_type":"text",
+			        "title":"Not Interested",
+			        "payload":"Not Interested"
+			      }
+			];
+			sendQuickReply(sender,responseText,replies);
+			break;
+			
 		default:
 			//unhandled action, just send back the text
 			sendTextMessage(sender, responseText);
